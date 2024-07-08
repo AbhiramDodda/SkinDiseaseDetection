@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Skin Disease Predictor</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+      }
+      h1 {
+        color: #333;
+        text-align: center;
+      }
+      h2 {
+        color: #555;
+      }
+      form {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 100%;
+        max-width: 600px;
+      }
+      input[type="file"] {
+        margin: 10px 0;
+      }
+      input[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+      .container {
+        max-width: 600px;
+        margin: 20px auto;
+        text-align: center;
+      }
+      .uploaded-image {
+        margin-top: 20px;
+      }
+      .result {
+        background: #fff;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+      }
+      .disease-list {
+        text-align: left;
+        margin: 20px 0;
+      }
+      .disease-list ul {
+        list-style-type: disc;
+        padding-left: 20px;
+        color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Skin Disease Predictor</h1>
+      <div class="disease-list">
+        <h2>Diseases that can be detected:</h2>
+        <ul>
+          <li>Actinic keratosis</li>
+          <li>Basal cell carcinoma</li>
+          <li>Benign keratosis</li>
+          <li>Dermatofibroma</li>
+          <li>Melanocytic nevus</li>
+          <li>Melanoma</li>
+          <li>Squamous cell carcinoma</li>
+          <li>Vascular lesion</li>
+        </ul>
+      </div>
+      <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" />
+        <input type="submit" value="Upload" />
+      </form>
+      {% if filename %}
+      <div class="uploaded-image">
+        <h2>Uploaded Image:</h2>
+        <img
+          src="{{ url_for('uploaded_file', filename=filename) }}"
+          alt="Uploaded Image"
+          style="max-width: 100%; border-radius: 8px"
+        />
+      </div>
+      <div class="result">
+        <h2>Result:</h2>
+        <p>{{ result }}</p>
+        <h2>Confidence:</h2>
+        <p>{{ confidence }}%</p>
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
